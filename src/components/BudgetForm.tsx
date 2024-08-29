@@ -2,10 +2,13 @@ import { useState } from "react"
 
 
 export default function BudgetForm() {
-
+//Creamos una variable de estado llamada budget usando el hook useState e inicializamos su valor en 0.
+// Esta variable almacenará el valor del presupuesto ingresado por el usuario.
     const [budget,setBudget]=useState(0)
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
         //console.log(e.target.valueAsNumber)
+//Actualizamos el valor de budget con el valor numérico ingresado en el input. e.target.valueAsNumber 
+//obtiene el valor del input y lo convierte a un número.
         setBudget(e.target.valueAsNumber)
     }
 
@@ -25,7 +28,7 @@ export default function BudgetForm() {
                 placeholder="Define tu presupuesto"
                 name="budget"
                 value={budget}
-                onChange={handleChange}
+                onChange={handleChange}//el evento onChange llama a la función handleChange cuando cambia el valor.
             
             />
         </div>
