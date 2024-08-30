@@ -1,11 +1,3 @@
-//Context API - ya viene integrado con react - Nos permite manejar un estado global sin instalar dependencias 
-//Context API permite tener un estado global en tu app, esto quiere decir que solo tiene una instancia del state que se puede acceder desde cualquier componente vía props. 
-//el hook a utilizar es useContext
-//alternativas a Context API
-//Context API no requiere dependencias pero su boilerplate para configurarlo
- //otras alternativas son Zustand o Redux Toolkit
-
-
 
 export type BudgetActions = 
     { type:'add-budget', payload:{budget:number} }
