@@ -36,6 +36,7 @@ export default function BudgetForm() {
                 placeholder="Define tu presupuesto"
                 name="budget"
                 value={budget}//de esta forma inicializa en 0 el formulario
+                
                 onChange={handleChange}//el evento onChange llama a la función handleChange cuando cambia el valor.
             
             />
