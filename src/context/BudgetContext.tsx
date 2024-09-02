@@ -49,12 +49,14 @@ export const BudgetContext = createContext<BudgetContextProps>(null!)
 //Provider - Es de donde vienen los datos -mayormente de nuestro reducer
 //siempre es un arrow function y siempre retorna algo - el context es tsx por la sintaxis 
 //Esta línea define el componente funcional BudgetProvider, que recibe las props children, siguiendo el tipo BudgetProviderProps.
+// El null! indica que el valor no será null en tiempo de uso, gracias a TypeScript.
 export const BudgetProvider = ({children}: BudgetProviderProps ) => {
 
     //instanciar - Poner en memoria un objeto, crearlo.
     const [state,dispatch]=useReducer(budgetReducer,initialState)//value
     return(
         //Aquí, valor es la información que estamos compartiendo y children son los componentes que estarán envueltos por el proveedor.
+        //Esta estructura permite que cualquier componente dentro de BudgetProvider tenga acceso al estado y a la función de despacho para actualizar ese estado, facilitando la gestión del estado global en la aplicación.
         <BudgetContext.Provider
             value={{
                 state,
