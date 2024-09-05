@@ -1,15 +1,18 @@
 
 export type BudgetActions = 
-    { type:'add-budget', payload:{budget:number} }
+    { type:'add-budget', payload:{budget:number} }|
+    { type:'show-modal'}
 
 
 
 export type BudgetState = {
-    budget:number     
+    budget:number
+    modal:boolean
 }
 
 export const initialState : BudgetState = {
-    budget:0
+    budget:0,
+    modal:false
 }
 
 export const budgetReducer = (
@@ -25,6 +28,14 @@ export const budgetReducer = (
 //.budget: Esta propiedad dentro del payload contiene el nuevo valor de presupuesto que se desea asignar a la propiedad budget del estado.
                 budget:action.payload.budget//Actualiza la propiedad budget del estado con el nuevo valor de presupuesto proporcionado en la acción.
 //Esta línea de código esencialmente está diciendo: "Actualiza la propiedad budget del estado con el nuevo valor de presupuesto que se encuentra en la propiedad budget del payload de la acción actual".
+            }
+        }
+
+        if(action.type==='show-modal'){
+
+            return{
+                ...state,
+                modal:true
             }
         }
 
