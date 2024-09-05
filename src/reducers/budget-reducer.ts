@@ -1,7 +1,8 @@
 
 export type BudgetActions = 
     { type:'add-budget', payload:{budget:number} }|
-    { type:'show-modal'}
+    { type:'show-modal'}|
+    { type:'close-modal'}
 
 
 
@@ -30,12 +31,20 @@ export const budgetReducer = (
 //Esta línea de código esencialmente está diciendo: "Actualiza la propiedad budget del estado con el nuevo valor de presupuesto que se encuentra en la propiedad budget del payload de la acción actual".
             }
         }
-
+        //otra opcion seria un toggle-modal como 1 solo action y solo este codigo modal: !state.modal
         if(action.type==='show-modal'){
 
             return{
                 ...state,
                 modal:true
+            }
+        }
+
+        if(action.type==='close-modal'){
+
+            return{
+                ...state,
+                modal:false
             }
         }
 
