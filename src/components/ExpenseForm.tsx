@@ -1,4 +1,5 @@
 //componente de registrar gastos--almacenar informacion
+//me quede por aqui
 import { useState } from "react";
 import type { DraftExpense } from "../types";
 import { categories } from "../data/categories";
