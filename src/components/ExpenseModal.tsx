@@ -1,6 +1,7 @@
+//npm i react-date-picker
 import { Fragment } from 'react'
-import { PlusCircleIcon } from '@heroicons/react/24/solid'
-import { Dialog, Transition,DialogPanel, TransitionChild} from '@headlessui/react'
+import { PlusCircleIcon } from '@heroicons/react/24/solid'//npm i @heroicons/react
+import { Dialog, Transition,DialogPanel, TransitionChild} from '@headlessui/react'//npm i @headlessui/react  
 import { useBudget } from '../hooks/useBudget'
 import ExpenseForm from './ExpenseForm'
 
