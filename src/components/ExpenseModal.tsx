@@ -1,13 +1,18 @@
-//npm i react-date-picker
-import { Fragment } from 'react'
-import { PlusCircleIcon } from '@heroicons/react/24/solid'//npm i @heroicons/react
-import { Dialog, Transition,DialogPanel, TransitionChild} from '@headlessui/react'//npm i @headlessui/react  
-import { useBudget } from '../hooks/useBudget'
-import ExpenseForm from './ExpenseForm'
+// Instalación de react-date-picker
+// npm i react-date-picker
+import { Fragment } from 'react' // Importamos Fragment de React, que permite agrupar elementos sin agregar un nodo extra al DOM
+import { PlusCircleIcon } from '@heroicons/react/24/solid' // Importamos un icono de Heroicons
+// npm i @heroicons/react
+import { Dialog, Transition, DialogPanel, TransitionChild } from '@headlessui/react' // Importamos componentes de Headless UI para crear modales
+// npm i @headlessui/react  
+import { useBudget } from '../hooks/useBudget' // Importamos un hook personalizado para manejar el estado del presupuesto
+import ExpenseForm from './ExpenseForm' // Importamos el componente ExpenseForm, que contiene el formulario para gastos
 
+
+// Definimos el componente ExpenseModal como una función
 export default function ExpenseModal() {
-
-    const {state,dispatch}=useBudget()
+  // Usamos el hook useBudget para obtener el estado y la función dispatch
+  const { state, dispatch } = useBudget();
 
   return (
     <>
