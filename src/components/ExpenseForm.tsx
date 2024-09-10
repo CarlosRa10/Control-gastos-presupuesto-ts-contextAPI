@@ -24,9 +24,13 @@ export default function ExpenseForm() {
         date: new Date()      // Fecha inicial establecida como la fecha actual
     });
 
+    const handleChangeDate = (value)=>{
+        console.log(value)
+    }
+
     return (
         <form className="space-y-5"> 
-            <legend className="uppercase text-center text-2xl font-black border-b-4 border-blue-500 py-2">
+            <legend className="uppercase text-center text-2xl font-black border-b-4 border-blue-500 py-2 text-red-500">
                 Nuevo Gasto
             </legend>
 
@@ -101,6 +105,7 @@ export default function ExpenseForm() {
                     <DatePicker
                         className='bg-slate-100 p-2 border-0'
                         value={expense.date}//como DatePicker es una dependencia que instalamos, acepta el props de value
+                        onChange={handleChangeDate}//handleChangeDate como manejador del evento onChange.
                     />
             </div>
 
