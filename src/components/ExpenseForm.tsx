@@ -3,7 +3,7 @@
 // Importamos el hook useState de React para manejar el estado del componente
 import { useState } from "react";
 // Importamos el tipo DraftExpense que define la estructura de un gasto
-import type { DraftExpense } from "../types";
+import type { DraftExpense, Value } from "../types";
 // Importamos las categorías de un archivo de datos
 import { categories } from "../data/categories";
 // Importamos el componente DatePicker para seleccionar fechas
@@ -24,8 +24,13 @@ export default function ExpenseForm() {
         date: new Date()      // Fecha inicial establecida como la fecha actual
     });
 
-    const handleChangeDate = (value)=>{
-        console.log(value)
+    //const handleChange = (e: React.ChangeEvent<HTMLInputElement>)
+
+    const handleChangeDate = (value:Value)=>{
+        setExpense({
+            ...expense,
+            date: value
+        })
     }
 
     return (
@@ -48,6 +53,7 @@ export default function ExpenseForm() {
                     className="bg-slate-100 p-2" // Estilos del campo de entrada
                     name="expenseName"
                     value={expense.expenseName} // Valor del campo ligado al estado
+                   // onChange={e=>}
                 />
             </div>
 
