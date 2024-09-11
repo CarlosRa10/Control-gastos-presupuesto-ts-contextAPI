@@ -1,7 +1,7 @@
 //componente de registrar gastos--almacenar informacion
 
 // Importamos el hook useState de React para manejar el estado del componente
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 // Importamos el tipo DraftExpense que define la estructura de un gasto
 import type { DraftExpense, Value } from "../types";
 // Importamos las categorías de un archivo de datos
@@ -11,6 +11,7 @@ import DatePicker from 'react-date-picker';
 // Importamos estilos CSS para el calendario y el selector de fechas
 import 'react-calendar/dist/Calendar.css';// npm i react-calendar
 import 'react-date-picker/dist/DatePicker.css';
+
 
 
 // Definimos el componente ExpenseForm como una función
@@ -24,7 +25,18 @@ export default function ExpenseForm() {
         date: new Date()      // Fecha inicial establecida como la fecha actual
     });
 
-    //const handleChange = (e: React.ChangeEvent<HTMLInputElement>)
+    const handleChange = (e: ChangeEvent<HTMLInputElement>| ChangeEvent<HTMLSelectElement>)=>{
+        //{name, value}: Utiliza destructuring para extraer las propiedades name y value del objeto e.target.
+        //name: Es el nombre del atributo name del elemento HTML, lo que permite identificar qué campo del formulario ha cambiado.
+        //value: Es el nuevo valor introducido por el usuario en el elemento.
+        const {name, value}=e.target//e.target: Hace referencia al elemento HTML que desencadenó el evento.
+        const isAmountField = ['amount'].includes(name)//Comprueba si el valor de name está presente en el array ['amount']. Si el nombre del elemento es "amount", esta expresión devolverá true.
+        //console.log(isAmountField)
+        setExpense({
+            ...expense,
+            [name]:isAmountField?+value:value
+        })
+    }
 
     const handleChangeDate = (value:Value)=>{
         setExpense({
@@ -32,6 +44,7 @@ export default function ExpenseForm() {
             date: value
         })
     }
+    
 
     return (
         <form className="space-y-5"> 
@@ -52,8 +65,8 @@ export default function ExpenseForm() {
                     placeholder="Añade el Nombre del gasto"
                     className="bg-slate-100 p-2" // Estilos del campo de entrada
                     name="expenseName"
-                    value={expense.expenseName} // Valor del campo ligado al estado
-                   // onChange={e=>}
+                    //value={expense.expenseName} // Valor del campo ligado al estado
+                    onChange={handleChange}
                 />
             </div>
 
@@ -71,7 +84,8 @@ export default function ExpenseForm() {
                     placeholder="Añade la cantidad del gasto: ej. 300"
                     className="bg-slate-100 p-2"
                     name="amount"
-                    value={expense.amount} // Valor del campo ligado al estado
+                    //value={expense.amount} // Valor del campo ligado al estado -*
+                    onChange={handleChange}
                     />
             </div>
 
@@ -87,7 +101,8 @@ export default function ExpenseForm() {
                     id='category'
                     className="bg-slate-100 p-2"
                     name="category"
-                    value={expense.category}
+                    //value={expense.category}
+                    onChange={handleChange}
                     >
                         <option value="">-- Seleccione --</option>
                         {categories.map(category =>(
