@@ -12,7 +12,7 @@ import DatePicker from 'react-date-picker';
 import 'react-calendar/dist/Calendar.css';// npm i react-calendar
 import 'react-date-picker/dist/DatePicker.css';
 import ErrorMessage from "./ErrorMessage";
-
+import { useBudget } from "../hooks/useBudget";
 
 
 // Definimos el componente ExpenseForm como una función
@@ -27,6 +27,7 @@ export default function ExpenseForm() {
     });
 
     const [error, setError]=useState('')
+    const {dispatch}=useBudget()
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>| ChangeEvent<HTMLSelectElement>)=>{
         //{name, value}: Utiliza destructuring para extraer las propiedades name y value del objeto e.target.
@@ -58,7 +59,9 @@ export default function ExpenseForm() {
             setError('Todos los Campos son obligatorios')
             return
         }
-        console.log('todo bien...')
+        //console.log('todo bien...')
+        //Agregar un nuevo gasto
+        dispatch({type:'add-expense',payload:{expense}})
     }
 
     return (
