@@ -11,6 +11,7 @@ import DatePicker from 'react-date-picker';
 // Importamos estilos CSS para el calendario y el selector de fechas
 import 'react-calendar/dist/Calendar.css';// npm i react-calendar
 import 'react-date-picker/dist/DatePicker.css';
+import ErrorMessage from "./ErrorMessage";
 
 
 
@@ -24,6 +25,8 @@ export default function ExpenseForm() {
         category: '',         // Categoría vacía inicialmente
         date: new Date()      // Fecha inicial establecida como la fecha actual
     });
+
+    const [error, setError]=useState('')
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>| ChangeEvent<HTMLSelectElement>)=>{
         //{name, value}: Utiliza destructuring para extraer las propiedades name y value del objeto e.target.
@@ -45,12 +48,26 @@ export default function ExpenseForm() {
         })
     }
     
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        //Validar--object es un metodo para objetos-object.values tranforma objetos en arreglos
+        //Object.values(expense): Esta parte extrae todos los valores del objeto expense y los convierte en un array.
+        //.includes(''): Este método verifica si el array resultante contiene una cadena vacía. Si encuentra al menos un valor vacío, la condición se evalúa como verdadera.
+        if(Object.values(expense).includes('')|| Object.values(expense).includes(0)){
+            //console.log('error...')
+            setError('Todos los Campos son obligatorios')
+            return
+        }
+        console.log('todo bien...')
+    }
 
     return (
-        <form className="space-y-5"> 
+        <form className="space-y-5" onSubmit={handleSubmit}> 
             <legend className="uppercase text-center text-2xl font-black border-b-4 border-blue-500 py-2 text-red-500">
                 Nuevo Gasto
             </legend>
+            {/* //lo que le pasemos al state error lo renderiza el componente */}
+            {error && <ErrorMessage>{error}</ErrorMessage>}
 
             <div className="flex flex-col gap-2">
                 <label 
