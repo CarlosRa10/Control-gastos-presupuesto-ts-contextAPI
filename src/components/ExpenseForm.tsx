@@ -62,6 +62,15 @@ export default function ExpenseForm() {
         //console.log('todo bien...')
         //Agregar un nuevo gasto
         dispatch({type:'add-expense',payload:{expense}})
+        
+        
+        //Reiniciar el state
+        setExpense({
+            expenseName: '',      
+            amount: 0,          
+            category: '',        
+            date: new Date()     
+        })
     }
 
     return (
@@ -85,7 +94,7 @@ export default function ExpenseForm() {
                     placeholder="Añade el Nombre del gasto"
                     className="bg-slate-100 p-2" // Estilos del campo de entrada
                     name="expenseName"
-                    //value={expense.expenseName} // Valor del campo ligado al estado
+                    value={expense.expenseName} // Valor del campo ligado al estado
                     onChange={handleChange}
                 />
             </div>
@@ -104,7 +113,7 @@ export default function ExpenseForm() {
                     placeholder="Añade la cantidad del gasto: ej. 300"
                     className="bg-slate-100 p-2"
                     name="amount"
-                    //value={expense.amount} // Valor del campo ligado al estado -*
+                    value={expense.amount} // Valor del campo ligado al estado -*
                     onChange={handleChange}
                     />
             </div>
@@ -121,7 +130,7 @@ export default function ExpenseForm() {
                     id='category'
                     className="bg-slate-100 p-2"
                     name="category"
-                    //value={expense.category}
+                    value={expense.category}
                     onChange={handleChange}
                     >
                         <option value="">-- Seleccione --</option>
