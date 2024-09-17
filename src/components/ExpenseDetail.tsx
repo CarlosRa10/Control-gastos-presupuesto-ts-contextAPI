@@ -12,6 +12,7 @@ import { formatDate } from "../helpers"
 import { Expense } from "../types"
 import AmountDisplay from "./AmountDisplay"
 import { categories } from "../data/categories"
+import { useBudget } from "../hooks/useBudget"
 import 'react-swipeable-list/dist/styles.css'
 
 type ExpenseDetailProps = {
@@ -19,6 +20,7 @@ type ExpenseDetailProps = {
 }
 
 export default function ExpenseDetail({expense}:ExpenseDetailProps) {
+    const {dispatch} = useBudget()
 
   const categoryInfo = useMemo(()=>categories.filter(cat=>cat.id===expense.category)[0],[expense])
   const leadingActions = () => (
@@ -34,7 +36,7 @@ export default function ExpenseDetail({expense}:ExpenseDetailProps) {
   const trailingActions = () => (
     <TrailingActions>
         <SwipeAction
-            onClick={()=>{}}
+            onClick={()=>dispatch({type:'remove-expense',payload:{id:expense.id} })}
             destructive={true}
         >
             Eliminar
@@ -46,7 +48,7 @@ export default function ExpenseDetail({expense}:ExpenseDetailProps) {
   return (
     <SwipeableList>
         <SwipeableListItem
-            maxSwipe={30}//los 30 pixeles se empiza a mover, que acciones se van a disparar
+            maxSwipe={30}//los 30 pixeles se empiza a mover, que acciones se van a disparar-- Establece la distancia máxima que se puede deslizar el elemento antes de que se muestren las acciones.
             leadingActions={leadingActions()}
             trailingActions={trailingActions()}
         >
