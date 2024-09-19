@@ -68,8 +68,13 @@ export default function ExpenseForm() {
             return
         }
         //console.log('todo bien...')
-        //Agregar un nuevo gasto
-        dispatch({type:'add-expense',payload:{expense}})
+        //Agregar un nuevo gasto o actualizar el gasto
+        if(state.editingId){
+             dispatch({type:'update-expense',payload:{expense:{id:state.editingId,...expense}}})//cuando estamos en el formulario no se crea id hasta que le demos click asi que para actualizar en el formulario hay que recuperar el id
+        }else{
+            dispatch({type:'add-expense',payload:{expense}})
+
+        }
         
         
         //Reiniciar el state
