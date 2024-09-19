@@ -1,7 +1,7 @@
 //componente de registrar gastos--almacenar informacion
 
 // Importamos el hook useState de React para manejar el estado del componente
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 // Importamos el tipo DraftExpense que define la estructura de un gasto
 import type { DraftExpense, Value } from "../types";
 // Importamos las categorías de un archivo de datos
@@ -27,7 +27,15 @@ export default function ExpenseForm() {
     });
 
     const [error, setError]=useState('')
-    const {dispatch}=useBudget()
+    const {dispatch, state}=useBudget()
+
+    useEffect(()=>{
+        if(state.editingId){//si tenemos algo en el state - filtramos cual gasto es o detectarlo - currentExpense es la variable temporal (i)
+            const editingExpense = state.expenses.filter(currentExpense => currentExpense.id === state.editingId )
+            [0]
+            setExpense(editingExpense)
+        }
+    },[state.editingId])
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>| ChangeEvent<HTMLSelectElement>)=>{
         //{name, value}: Utiliza destructuring para extraer las propiedades name y value del objeto e.target.
