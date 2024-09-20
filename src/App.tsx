@@ -16,6 +16,7 @@ function App() {
 
   const isValidBudget = useMemo(()=>state.budget>0,[state.budget])
  
+  //App es típicamente el componente más alto en la jerarquía que mantiene el contexto global o comparte el estado a través de múltiples componentes o páginas.Al mantener esta lógica aquí, aseguras que todos los cambios de estado a lo largo de la aplicación se gestionen y almacenen consistentemente sin importar dónde ocurran.
   useEffect(()=>{
     localStorage.setItem('budget',state.budget.toString())
     localStorage.setItem('expenses',JSON.stringify(state.expenses))
