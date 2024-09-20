@@ -19,10 +19,19 @@ export type BudgetState = {
     editingId:Expense['id']
 }
 
+const initialBudget = () : number => {//Define una función llamada initialBudget que devuelve un número.
+    const localStorageBudget = localStorage.getItem('budget')//Obtiene el valor almacenado en el localStorage con la clave 'budget'. Si no existe, localStorageBudget será null.
+    return localStorageBudget ? +localStorageBudget : 0 //Si localStorageBudget no es null, convierte la cadena de texto a número usando el operador +. - Si localStorageBudget es null, devuelve 0
+}
+const localStorageExpenses = () :Expense[] => { //Define una función llamada localStorageExpenses que devuelve un arreglo de objetos Expense.
+    const localStorageExpenses = localStorage.getItem('expenses')// Obtiene el valor almacenado en el localStorage con la clave 'expenses'.
+    return localStorageExpenses ? JSON.parse(localStorageExpenses) : []//Si localStorageExpenses no es null, convierte la cadena de texto en un arreglo de objetos usando JSON.parse.-Si localStorageExpenses es null, devuelve un arreglo vacío.
+}
+
 export const initialState : BudgetState = {
-    budget:0,
+    budget:initialBudget(),
     modal:false,
-    expenses:[],
+    expenses:localStorageExpenses(),
     editingId:''
 }
 
