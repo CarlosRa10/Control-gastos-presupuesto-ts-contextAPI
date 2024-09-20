@@ -1,4 +1,4 @@
-import { useReducer, createContext, Dispatch, ReactNode } from "react"
+import { useReducer, createContext, Dispatch, ReactNode, useMemo } from "react"
 //useReducer: un hook para manejar el estado complejo.
 //createContext: una función para crear un contexto.
 //Dispatch: un tipo que se utiliza para definir funciones de despacho de acciones.
@@ -31,6 +31,8 @@ import { BudgetActions, budgetReducer,BudgetState,initialState } from "../reduce
 type BudgetContextProps = {
     state: BudgetState
     dispatch: Dispatch<BudgetActions>
+    totalExpenses: number
+    remainingBudget:number
 }
 
 
@@ -52,15 +54,21 @@ export const BudgetContext = createContext<BudgetContextProps>(null!)
 // El null! indica que el valor no será null en tiempo de uso, gracias a TypeScript.
 export const BudgetProvider = ({children}: BudgetProviderProps ) => {
 
+
+    
     //instanciar - Poner en memoria un objeto, crearlo.
     const [state,dispatch]=useReducer(budgetReducer,initialState)//value
+    const totalExpenses = useMemo(()=> state.expenses.reduce((total,expense)=>expense.amount+total,0),[state.expenses])
+    const remainingBudget = state.budget - totalExpenses
     return(
         //Aquí, valor es la información que estamos compartiendo y children son los componentes que estarán envueltos por el proveedor.
         //Esta estructura permite que cualquier componente dentro de BudgetProvider tenga acceso al estado y a la función de despacho para actualizar ese estado, facilitando la gestión del estado global en la aplicación.
         <BudgetContext.Provider
             value={{
                 state,
-                dispatch
+                dispatch,
+                totalExpenses,
+                remainingBudget
             }}
         >
             {children}
