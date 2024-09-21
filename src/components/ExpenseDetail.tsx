@@ -1,5 +1,7 @@
 //npm i react-swipeable-list
 //npm i prop-types
+//me quede por aqui
+
 import { useMemo } from "react"
 import {
     LeadingActions,
