@@ -1,17 +1,24 @@
-
+import {CircularProgressbar,buildStyles} from 'react-circular-progressbar'
 import { useBudget } from "../hooks/useBudget";
 import AmountDisplay from "./AmountDisplay";
 
 export default function BudgetTrackers() {
 
   const {state,totalExpenses,remainingBudget}=useBudget()
+ // const percentage = 
 
   return (
     <div
     className="grid grid-cols-1 md:grid-cols-2 gap-5">
       <div
       className="flex justify-center">
-          <img src="/grafico.jpg" alt="Gráfica de gastos" />
+          <CircularProgressbar 
+            value={50}
+            styles={buildStyles({
+              pathColor:'#3b82f6',
+              trailColor:'#F5F5F5'
+            })}
+          />
       </div>
       
       <div
